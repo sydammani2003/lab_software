@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import {
   AreaChart, Area, LineChart, Line, BarChart, Bar, PieChart, Pie,
@@ -6,7 +6,7 @@ import {
 } from 'recharts';
 import {
   TrendingUp, TrendingDown, DollarSign, Users, FileText, Calendar,
-  Download, RefreshCw, AlertCircle
+  Download, RefreshCw, AlertCircle, Filter
 } from 'lucide-react';
 
 // Initialize Supabase (Replace with your credentials)
@@ -181,9 +181,9 @@ const AnalyticsDashboard = () => {
   // Fetch data on mount and when date range changes
   useEffect(() => {
     fetchData();
-  }, [dateRange, fetchData]);
+  }, [dateRange]);
 
-  const fetchData = useCallback(async () => {
+  const fetchData = async () => {
     setLoading(true);
     setError(null);
     
@@ -199,7 +199,7 @@ const AnalyticsDashboard = () => {
     }
     
     setLoading(false);
-  }, [dateRange]);
+  };
 
   const handleRefresh = async () => {
     setRefreshing(true);
